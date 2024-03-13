@@ -84,10 +84,8 @@ public class CreateNoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Thiết lập giao diện và ánh xạ các thành phần giao diện:
         setContentView(R.layout.activity_create_note);
 
-        // Thiết lập sự kiện khi người dùng bấm nút back (imageBack), khi đó sẽ gọi onBackPressed() để thoát khỏi hoạt động hiện tại.
         ImageView imageBack = findViewById(R.id.imageBack);
         imageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +108,6 @@ public class CreateNoteActivity extends AppCompatActivity {
                         .format(new Date())
         );
 
-        // Thiết lập sự kiện khi người dùng bấm nút lưu (imageSave), khi đó sẽ gọi phương thức saveNote().
         ImageView imageSave = findViewById(R.id.imageSave);
         imageSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +119,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         selectedNoteColor = "#333333";
         seletedImagePath = "";
 
-        // Nếu isViewOrUpdate được truyền từ intent và là true,
-        // lấy thông tin ghi chú đã có sẵn và gọi hàm setViewOrUpdateNote() để cập nhật giao diện.
         if(getIntent().getBooleanExtra("isViewOrUpdate", false)) {
             alreadyAvailableNote = (Note) getIntent().getSerializableExtra("note");
             setViewOrUpdateNote();
@@ -137,8 +132,6 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
         });
 
-        // Thiết lập sự kiện khi người dùng bấm nút xóa hình ảnh (imageRemoveImage) hoặc xóa URL (imageRemoveWebURL),
-        // sẽ xóa dữ liệu tương ứng và ẩn đi các thành phần liên quan trên giao diện.
         findViewById(R.id.imageRemoveImage).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,9 +142,6 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
         });
 
-        // Xử lý trường hợp ghi chú được tạo từ Quick Action.
-        // Nếu isFromQuickAction được truyền từ intent và là true, kiểm tra loại hành động (quickActionType)
-        // và hiển thị hình ảnh hoặc URL tương ứng.
         if(getIntent().getBooleanExtra("isFromQuickAction", false)){
             String type = getIntent().getStringExtra("quickActionType");
             if(type!=null){
